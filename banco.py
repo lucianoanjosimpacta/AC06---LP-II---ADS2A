@@ -17,11 +17,11 @@ class Cliente():
     caso o email não seja um email válido gera um ValueError,
     caso o telefone não seja um número gera um TypeError
     """
-
+    #VERIFICA SE O TELEFONE É VÁLIDO NA CRIAÇÃO DO OBJETO
     def __init__(self, nome: str, telefone: int, email: str):
         if type(telefone) != int:
             raise TypeError("O telefone deve ser um número válido")
-        
+    #VERIFICA SE O EMAIL É VÁLIDO NA CRIAÇÃO DO OBJETO   
         cont_arroba = 0
         cont_chars = len(email)
         cont_ate_ponto = cont_chars - 4
@@ -34,7 +34,7 @@ class Cliente():
             self.__email = email
         else:
             raise ValueError("O email deve ser um email válido")
-
+        
         self.__nome = nome
         self.__telefone = telefone
 
