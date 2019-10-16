@@ -45,9 +45,6 @@ def test_get_mail():
     assert c.get_email() == 'email@mail.com', 'getter de email errado'
 
 
-
-
-
 def test_set_telefone_erro():
     c = Cliente('nome', 99999999, 'email@mail.com')
     try:

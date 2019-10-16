@@ -5,6 +5,7 @@
 #         gabriel.ogoncalves@aluno.faculdadeimpacta.com.br
 
 from typing import Union, List, Dict
+import re
 
 Number = Union[int, float]
 
@@ -17,24 +18,18 @@ class Cliente():
     caso o email não seja um email válido gera um ValueError,
     caso o telefone não seja um número gera um TypeError
     """
-    #VERIFICA SE O TELEFONE É VÁLIDO NA CRIAÇÃO DO OBJETO
+    # VERIFICA SE O TELEFONE É VÁLIDO NA CRIAÇÃO DO OBJETO
     def __init__(self, nome: str, telefone: int, email: str):
         if type(telefone) != int:
-            raise TypeError("O telefone deve ser um número válido")
-    #VERIFICA SE O EMAIL É VÁLIDO NA CRIAÇÃO DO OBJETO   
-        cont_arroba = 0
-        cont_chars = len(email)
-        cont_ate_ponto = cont_chars - 4
-        for char in email:
-            if char == '@':
-                cont_arroba += 1
-            elif cont_arroba > 1:
-                raise ValueError("O email deve ser um email válido")
-        if email[cont_ate_ponto:cont_chars] == '.com':
-            self.__email = email
+            raise TypeError("Número de telefone inválido!")
+    # VERIFICA SE O EMAIL É VÁLIDO NA CRIAÇÃO DO OBJETO
+        email_valid = re.compile(
+            r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$"
+            )
+        if not email_valid.match(email):
+            raise ValueError("E-mail inválido!")
         else:
-            raise ValueError("O email deve ser um email válido")
-        
+            self.__email = email
         self.__nome = nome
         self.__telefone = telefone
 
@@ -69,18 +64,15 @@ class Cliente():
         Mutador do atributo Email, caso não receba um email válido
         gera um ValueError.
         """
-        cont_arroba = 0
-        cont_chars = len(novo_email)
-        cont_ate_ponto = cont_chars - 4
-        for char in novo_email:
-            if char == '@':
-                cont_arroba += 1
-            elif cont_arroba > 1:
-                raise ValueError("O email deve ser um email válido")
-        if novo_email[cont_ate_ponto:cont_chars] == '.com':
-            self.__email = novo_email
+        email_valid = re.compile(
+            r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$"
+            )
+
+        if not email_valid.match(novo_email):
+            raise ValueError("E-mail inválido!")
         else:
-            raise ValueError("O email deve ser um email válido")
+            self.__email = novo_email
+        return None
 
 
 class Banco():
