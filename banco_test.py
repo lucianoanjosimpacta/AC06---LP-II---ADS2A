@@ -94,48 +94,6 @@ def lista_contas_vazio():
     assert len(b.lista_contas()) == 0, 'O banco começa sem nenhuma conta'
 
 
-def lista_contas_com_contas():
-    b = Banco('nome')
-    c = Cliente('nome', 99999999, 'email@mail.com')
-    b.abre_conta([c], 200)
-    b.abre_conta([c], 300)
-    assert len(b.lista_contas()) == 2, 'O banco deveria ter 2 contas'
-    for cc in b.lista_contas():
-        assert type(cc) == Conta, 'deveria retornar uma lista de contas'
-
-
-def test_abre_conta():
-    b = Banco('nome')
-    c = Cliente('nome', 99999999, 'email@mail.com')
-    b.abre_conta([c], 100)
-    ccs = b.lista_contas()
-    assert len(ccs) == 1
-    assert type(ccs[0]) == Conta
-    assert ccs[0].get_numero() == 1, 'A primeira conta deve ser a numero 1'
-
-
-def test_abre_conta_2():
-    b = Banco('nome')
-    c = Cliente('nome', 99999999, 'email@mail.com')
-    b.abre_conta([c], 100)
-    b.abre_conta([c], 500)
-    ccs = b.lista_contas()
-    assert len(ccs) == 2
-    assert type(ccs[1]) == Conta
-    assert ccs[1].get_numero() == 2, 'A segunda conta deve ser a numero 2'
-
-
-def test_n_abre_conta():
-    b = Banco('nome')
-    c = Cliente('nome', 99999999, 'email@mail.com')
-    try:
-        b.abre_conta([c], -100)
-    except ValueError:
-        assert True
-    except Exception:
-        assert False, 'Não lançou um ValueError'
-    ccs = b.lista_contas()
-    assert len(ccs) == 0
 
 
 def test_cria_conta():
@@ -221,7 +179,8 @@ def test_extrato():
 
 def test_extrato_2():
     c = Cliente('nome', 99999999, 'email@mail.com')
-    cc = Conta([c], 1, 200)
+    cc = Conta([c], 1, 200
+    )
     cc.saque(150)
     extrato = cc.extrato()
     assert len(extrato) == 2

@@ -64,11 +64,11 @@ class Cliente():
         Mutador do atributo Email, caso não receba um email válido
         gera um ValueError.
         """
-        email_valid = re.compile(
+        email_valido = re.compile(
             r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$"
             )
 
-        if not email_valid.match(novo_email):
+        if not email_valido.match(novo_email):
             raise ValueError("E-mail inválido!")
         else:
             self.__email = novo_email
@@ -87,11 +87,12 @@ class Banco():
     contas do banco
     """
     def __init__(self, nome: str):
-        pass
+        self.__nome = nome
 
     def get_nome(self) -> str:
         """Acessor do Atributo Nome."""
-        pass
+        nome_banco = self.__nome
+        return nome_banco
 
     def abre_conta(self, clientes: List[Cliente], saldo_ini: Number) -> None:
         """
@@ -120,7 +121,11 @@ class Conta():
 
     def __init__(self, clientes: List[Cliente], numero_conta: int,
                  saldo_inicial: Number):
-        pass
+        if saldo_inicial < 0:
+            raise ValueError("Saldo inicial inválido!")
+        self.__clientes = list(clientes)
+        self.__numero_conta = numero_conta
+        self.__saldo_inicial = saldo_inicial
 
     def get_clientes(self) -> List[Cliente]:
         '''
