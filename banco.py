@@ -88,6 +88,8 @@ class Banco():
     """
     def __init__(self, nome: str):
         self.__nome = nome
+        self.__nova_conta = []
+        self.__lista_conta = []
 
     def get_nome(self) -> str:
         """Acessor do Atributo Nome."""
@@ -100,11 +102,18 @@ class Banco():
         e o saldo inicial.
         Caso o saldo inicial seja menor que 0 devolve um ValueError
         """
-        pass
+        # NECESSÁRIO CORRIGIR ESTE MÉTODO
+        num_conta = 1
+        if saldo_ini < 0:
+            raise ValueError("Saldo inválido!")
+        self.__nova_conta = Conta(clientes, num_conta, saldo_ini)
+        num_conta += 1
+        return None
 
     def lista_contas(self) -> List['Conta']:
         """Retorna a lista com todas as contas do banco."""
-        pass
+        self.__lista_conta.append(self.__nova_conta)
+        return self.__lista_conta
 
 
 class Conta():
@@ -131,19 +140,22 @@ class Conta():
         '''
         Acessor para o atributo Clientes
         '''
-        pass
+        clientes = self.__clientes
+        return clientes
 
     def get_saldo(self) -> Number:
         '''
         Acessor para o Atributo Saldo
         '''
-        pass
+        saldo = self.__saldo_inicial
+        return saldo
 
     def get_numero(self) -> int:
         '''
         Acessor para o atributo Numero
         '''
-        pass
+        num_conta = self.__numero_conta
+        return num_conta
 
     def saque(self, valor: Number) -> None:
         '''
