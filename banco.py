@@ -88,7 +88,7 @@ class Banco():
     """
     def __init__(self, nome: str):
         self.__nome = nome
-        self.__nova_conta = []
+        self.__num_conta = 0
         self.__lista_conta = []
 
     def get_nome(self) -> str:
@@ -103,17 +103,18 @@ class Banco():
         Caso o saldo inicial seja menor que 0 devolve um ValueError
         """
         # NECESSÁRIO CORRIGIR ESTE MÉTODO
-        num_conta = 1
+        if len(self.__lista_conta) >= 0:
+            self.__num_conta += 1
         if saldo_ini < 0:
             raise ValueError("Saldo inválido!")
-        self.__nova_conta = Conta(clientes, num_conta, saldo_ini)
-        num_conta += 1
+        nova_conta = Conta(clientes, self.__num_conta, saldo_ini)
+        self.__lista_conta.append(nova_conta)
         return None
 
     def lista_contas(self) -> List['Conta']:
         """Retorna a lista com todas as contas do banco."""
-        self.__lista_conta.append(self.__nova_conta)
-        return self.__lista_conta
+        listas_contas = self.__lista_conta
+        return listas_contas
 
 
 class Conta():
