@@ -136,6 +136,9 @@ class Conta():
         self.__clientes = list(clientes)
         self.__numero_conta = numero_conta
         self.__saldo_inicial = saldo_inicial
+        self.__operacoes = [
+            ('saldo_inicial', saldo_inicial)
+        ]
 
     def get_clientes(self) -> List[Cliente]:
         '''
@@ -164,16 +167,50 @@ class Conta():
         Caso o valor do saque seja maior que o saldo da conta,
         deve retornar um ValueError, e não efetuar o saque
         '''
-        pass
+        if valor > self.__saldo_inicial:
+            raise ValueError("Saldo insuficiente!")
+        else:
+            result_saque = self.__saldo_inicial - valor
+            self.__saldo_inicial -= result_saque
+        op_saque = ('saque', result_saque)
+        self.__operacoes.append(op_saque)       
+        return None
+            
 
     def deposito(self, valor: Number):
         '''
         Método depósito da classe Conta, operação deve aparecer no extrato
         '''
-        pass
+        self.__saldo_inicial += valor
+        op_deposito = ('deposito', valor)
+        self.__operacoes.append(op_deposito)
+        return None
 
     def extrato(self) -> List[Dict[str, Number]]:
         '''
         Retorna uma lista com as operações (Tuplas) executadas na Conta
         '''
-        pass
+        op_extrato = self.__operacoes
+        return op_extrato
+
+'''
+------------- COMENTÁRIOS ----------------
+FALTA CORRIGIR O SEGUINTE ERRO QUE ESTÁ OCORRENDO NOS TESTES:
+
+____________ test_extrato_2 ____________
+
+    def test_extrato_2():
+        c = Cliente('nome', 99999999, 'email@mail.com')
+        cc = Conta([c], 1, 200)
+        cc.saque(150)
+        extrato = cc.extrato()
+        assert len(extrato) == 2
+        assert extrato[0] == ('saldo_inicial', 200)
+>       assert extrato[1] == ('saque', 150)
+E       AssertionError: assert ('saque', 50) == ('saque', 150)
+E         At index 1 diff: 50 != 150
+E         Use -v to get the full diff
+
+banco_test.py:235: AssertionError
+
+'''

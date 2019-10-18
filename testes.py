@@ -10,7 +10,3 @@ banco_new = Banco('Banco Novo')
 
 banco_new.abre_conta('Luciano Gomes', 100)
 banco_new.abre_conta('Gabriel Gonçalves', 100)
-
-
-
-
