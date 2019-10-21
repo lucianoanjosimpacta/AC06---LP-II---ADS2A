@@ -172,10 +172,9 @@ class Conta():
         else:
             result_saque = self.__saldo_inicial - valor
             self.__saldo_inicial -= result_saque
-        op_saque = ('saque', result_saque)
-        self.__operacoes.append(op_saque)       
+        op_saque = ('saque', valor)
+        self.__operacoes.append(op_saque)
         return None
-            
 
     def deposito(self, valor: Number):
         '''
@@ -192,25 +191,3 @@ class Conta():
         '''
         op_extrato = self.__operacoes
         return op_extrato
-
-'''
-------------- COMENTÁRIOS ----------------
-FALTA CORRIGIR O SEGUINTE ERRO QUE ESTÁ OCORRENDO NOS TESTES:
-
-____________ test_extrato_2 ____________
-
-    def test_extrato_2():
-        c = Cliente('nome', 99999999, 'email@mail.com')
-        cc = Conta([c], 1, 200)
-        cc.saque(150)
-        extrato = cc.extrato()
-        assert len(extrato) == 2
-        assert extrato[0] == ('saldo_inicial', 200)
->       assert extrato[1] == ('saque', 150)
-E       AssertionError: assert ('saque', 50) == ('saque', 150)
-E         At index 1 diff: 50 != 150
-E         Use -v to get the full diff
-
-banco_test.py:235: AssertionError
-
-'''
