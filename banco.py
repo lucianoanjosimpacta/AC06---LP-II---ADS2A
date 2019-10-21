@@ -18,11 +18,9 @@ class Cliente():
     caso o email não seja um email válido gera um ValueError,
     caso o telefone não seja um número gera um TypeError
     """
-    # VERIFICA SE O TELEFONE É VÁLIDO NA CRIAÇÃO DO OBJETO
     def __init__(self, nome: str, telefone: int, email: str):
         if type(telefone) != int:
             raise TypeError("Número de telefone inválido!")
-    # VERIFICA SE O EMAIL É VÁLIDO NA CRIAÇÃO DO OBJETO
         email_valid = re.compile(
             r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$"
             )
@@ -102,7 +100,6 @@ class Banco():
         e o saldo inicial.
         Caso o saldo inicial seja menor que 0 devolve um ValueError
         """
-        # NECESSÁRIO CORRIGIR ESTE MÉTODO
         if len(self.__lista_conta) >= 0:
             self.__num_conta += 1
         if saldo_ini < 0:
